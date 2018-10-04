@@ -1,0 +1,182 @@
+
+=======================================================
+=======================================================
+		       RoBit v1.0
+=======================================================
+=======================================================
+
+———————————————————————————————————————————————————————
+		      Description
+———————————————————————————————————————————————————————
+An automated cryptocurrency trading bot and mobile interface.
+Optimized for MacOSX and iPhone 6.
+
+———————————————————————————————————————————————————————
+		      Installation
+———————————————————————————————————————————————————————
+* - Optional (for mobile user-interface module)
+
+1. Install Python (version 3.6 +)
+2. Download RoBit files.
+3.*Install Xcode.
+4. Install the correct libraries/ modules for Python and *Swift.
+5. Install MySQL. 
+6. Insert personal database username and password in the DSM and DM modules.
+7. In the appropriate database, create a new table:
+	"CREATE TABLE USTD_BTC (DateTime DATETIME,
+ 					High float, 
+					Low float, 
+					Open float, 
+					Close float, 
+					Volume float, 
+					QuoteVol float, 
+					WeightedAv float);"
+8.*If wanting to run in test-mode, please edit DataStream.py to retrieve historical data.
+9. Execute the DecMod.py file (Decision Module).
+10.*Create appropriately names AWS account and S3 Bucket.
+11.*Run the Xcode simulator (optimised for iPhone 6)
+
+———————————————————————————————————————————————————————
+		       Files List
+———————————————————————————————————————————————————————
+DataStream.py
+DecMod.py
+RoBit.xcworkspace
+
+
+———————————————————————————————————————————————————————
+		  Operation - General
+———————————————————————————————————————————————————————
+RoBit can generally be worked with in two ways. 
+
+1. Via the Decision Module (DecMod.py)
+2. Via the UI Module (RoBit)
+
+To work with the Decision Module, simply execute the python program from your local Terminal.
+
+	Example:
+	$ python DecMod.py 
+
+Below is a full list of all the optional arguments that can be parsed.
+———————————————————————————————————————————————————————
+		   Optional Arguments
+———————————————————————————————————————————————————————
+—-runs / -r (int default: 1)
+	Defines how many iterations the user/ developer would like RoBit to run its analysis.
+—-test / -t 
+	Indicates that RoBit should run in test-mode (as apposed to real-time).
+—-graph / -g 
+	Indicates that RoBit should produce a chart at the end of each iteration.
+—-date / -d (int int int int default 20 12 2017 0)
+	Defines a start-date and time for when RoBit should begin its trading.	
+	To be used in test-mode only.
+—-timeframe / -f (str default: “hour”)
+	Defines which time-frame RoBit will produce graphs for.
+	Optionals:
+		“hour”
+		“day”
+		“week”
+		“month”
+—-speed / -s (int default 1)
+	Defines the interval period between analysis (seconds).
+--clock / -c (str default “HOURS”)
+	Defines the time-jump between analysis.
+	Optionals:
+		“HOURS”
+		“DAYS”
+		“WEEKS”
+		“MNTHS”
+—-bulk / -b (int default 1)
+	Indicates RoBit should run in bulk-test-mode. This will repeat the entire program a defines number of times.
+	This mode also prints different feed to the terminal.
+—-mobile / -m
+	Indicates RoBit should send pricing updates to AWS/ Mobile interface
+—-deposit / -$ (default 100)
+	Defines what the starting funds should be (dollars).
+—-allLines / -l 
+	Indicates RoBit should include all horizontal support and resistance lines when producing charts.
+	It is advised not to include this argument when parsing, unless testing support and resistance levels.
+—-bullring / -^
+	Indicates RoBit should display bull-run start and end-points on charts.
+—-extra / -e
+	Provides additional information at the terminal.
+	
+———————————————————————————————————————————————————————
+		   Operation - User
+———————————————————————————————————————————————————————
+An end-user is recommended to run the DecMod file, specifying the number of days they wish RoBit to run for.
+
+	Example:
+	$ python DecMod.py —-runs 100
+
+It is advised to install the mobile application, for keeping track of profits/ losses.
+
+———————————————————————————————————————————————————————
+		 Operation - Developer
+———————————————————————————————————————————————————————
+A developer is recommended to run RoBit in test-mode, either in —test or —bulk depending on the type of analysis required.
+
+	Example:
+	$ python DecMod.py —-runs 100 -—test
+	$ python DecMod.py —-runs 100 —-test -—bulk 5
+
+It is not advised to install the mobile application, but to test entirely from the Terminal.
+
+———————————————————————————————————————————————————————
+		     Program Feed
+———————————————————————————————————————————————————————
+When running in test-mode, terminal output is produced in the following format:
+
+Per iteration:
+Example (with —-extra argument):
+
+#9 2018-02-15 00:00:00 Current Price: $7588.01
+       ((((((((Resistance line broken)))))))) (7737.37)
+            Current Market (DAYS): bull
+            Current Market (WEEKS): bear
+            Current Market (MNTHS): bull
+|- - - - - - - - - -SELL ORDER- - - - - - - - - -|
+                -+ New Balances +-
+                   Bitcoins: 0.0 
+                   Dollars: $68 
+
+Example (without —-extra argument):
+
+|- - - - - - - - - -BUY  ORDER- - - - - - - - - -|
+                -+ New Balances +-
+                   Bitcoins: 0.007204610951008645
+                   Dollars: $0 
+
+
+When running in bulk-test-mode, terminal output is produced in the following format:
+
+Example: 
+$ python data9.py --bulk 10 --test -r 100
+Iteration Number: 3 out of 10: Completion 78% 
+
+If the program is left to run through all of its iterations, or is forcibly quit with ‘ctrl + c’, RoBit will output some summary information to the terminal:
+
+Example:
+
+
+
+
++++++++++++++++++++
+ Exiting Program..
++++++++++++++++++++
+
+
+ Final Values in Dollars ($): [110,104]
+ Total Profitable Sales:  4
+ Total Lossable Sales:  2
+ Total Average: 107
+
+
+
+
+———————————————————————————————————————————————————————
+		  Contact Information
+———————————————————————————————————————————————————————
+For any development, user ability or bug issues, contact Adam Peter Cummings at:
+
+Email: adam_cummings_@outlook.com
